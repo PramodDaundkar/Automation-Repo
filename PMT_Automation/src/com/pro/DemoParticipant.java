@@ -13,10 +13,9 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ParticipantLogin {
+public class DemoParticipant {
 
 	public static void main(String[] args) throws Throwable {
 		
@@ -53,6 +52,12 @@ public class ParticipantLogin {
 		System.out.println(driver.findElement(By.xpath("//div/div//div[@aria-label='Welcome']")).getText());
 		int frameCount = driver.findElements(By.tagName("iframe")).size();
 		System.out.println("Welcome Screen"+":"+frameCount);
+		
+		for(int i=0; i<10;i++)
+		{
+		if(frameCount>1)
+		{
+		
 		driver.switchTo().frame(0);
 		waitForPageToLoad.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='player']/div/div[4]/button")));
 		driver.findElement(By.xpath("//div[@id='player']/div/div[4]/button")).click();
@@ -70,68 +75,16 @@ public class ParticipantLogin {
 	    waitForPageToLoad.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@ng-if='shouldShowButtonBar()']/button")));
 	   // driver.findElement(By.xpath("//div[@ng-if='shouldShowButtonBar()']/button")).click();
 	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
+		}else{
 //First Screen completed	    
-	    int frameCount2 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("Are you ready?"+":"+frameCount2);
+	    //int frameCount2 = driver.findElements(By.tagName("iframe")).size();
+	    //System.out.println("Are you ready?"+":"+frameCount2);
 	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
+		}
 	    int frameCount3 = driver.findElements(By.tagName("iframe")).size();
 	    System.out.println("Just so you know"+":"+frameCount3);
 	    
-	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
-	    int frameCount4 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("You’re about to make history."+":"+frameCount4);
-	    
-	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
-	    int frameCount5 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("Where You Live."+":"+frameCount5);
-	    
-	    Select state = new Select(driver.findElement(By.xpath("//div[@class='ng-scope']/select")));
-	    
-	    state.selectByVisibleText("Arizona");
-	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
-	    
-	    int frameCount6 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("Before We Begin"+":"+frameCount6);
-	    //This will work for Yes only as it needs to be generalise.
-	    driver.findElement(By.xpath("//div[@ng-if='shouldShowText()']/div")).click();
-	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
-	    
-	    int frameCount7 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("Where You Get Healthcare"+":"+frameCount7);
-	    Select stateHealth = new Select(driver.findElement(By.xpath("//div[@class='ng-scope']/select")));
-	    stateHealth.selectByVisibleText("Arizona");
-	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
-	    
-	    int frameCount8 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("Check Your Understanding"+":"+frameCount8);
-	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
-	    
-	    int frameCount9 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("What will I do?"+":"+frameCount9);
-	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
-	    
-	    int frameCount10 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("Keeping in Touch"+":"+frameCount10);
-	    
-	    driver.switchTo().frame(0);
-		waitForPageToLoad.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='player']/div/div[4]/button")));
-		driver.findElement(By.xpath("//div[@id='player']/div/div[4]/button")).click();
-		
-		/* Below Code is from Stackoverflow
-		 * https://stackoverflow.com/questions/40546546/how-to-click-on-a-specific-position-of-a-web-element-in-selenium/40571321#40571321
-		 */
-		WebElement progressBar2 = driver.findElement(By.xpath("//div[@class='ytp-progress-bar-container']/div[1]"));
-		int width2 = progressBar2.getSize().getWidth();
-		Actions act2 = new Actions(driver);
-	    act.moveToElement(progressBar2).moveByOffset((width/2)-2, 0).click().perform();
-	    
-	    driver.switchTo().defaultContent();
-	    Thread.sleep(4000);
-	    waitForPageToLoad.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@ng-if='shouldShowButtonBar()']/button")));
-	   // driver.findElement(By.xpath("//div[@ng-if='shouldShowButtonBar()']/button")).click();
-	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
-	    
-	   
+		}
 	    Thread.sleep(30000);
 		driver.close();
 	}
