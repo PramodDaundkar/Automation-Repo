@@ -51,7 +51,7 @@ public class ParticipantLogin {
 // Primary Consent: Welcome Screen
 		System.out.println(driver.findElement(By.xpath("//div/div//div[@aria-label='Welcome']")).getText());
 		int frameCount = driver.findElements(By.tagName("iframe")).size();
-		System.out.println(frameCount);
+		System.out.println("Welcome Screen"+":"+frameCount);
 		driver.switchTo().frame(0);
 		waitForPageToLoad.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='player']/div/div[4]/button")));
 		driver.findElement(By.xpath("//div[@id='player']/div/div[4]/button")).click();
@@ -67,11 +67,15 @@ public class ParticipantLogin {
 	    driver.switchTo().defaultContent();
 	    Thread.sleep(4000);
 	    waitForPageToLoad.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@ng-if='shouldShowButtonBar()']/button")));
-	    driver.findElement(By.xpath("//div[@ng-if='shouldShowButtonBar()']/button")).click();
+	   // driver.findElement(By.xpath("//div[@ng-if='shouldShowButtonBar()']/button")).click();
+	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
 //First Screen completed	    
 	    int frameCount2 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println(frameCount2);
-		
+	    System.out.println("Are you ready?"+":"+frameCount2);
+	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
+	    int frameCount3 = driver.findElements(By.tagName("iframe")).size();
+	    System.out.println("Just so you know"+":"+frameCount3);
+	    
 	    
 	    Thread.sleep(30000);
 		driver.close();
