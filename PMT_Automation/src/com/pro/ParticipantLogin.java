@@ -47,19 +47,33 @@ public class ParticipantLogin {
 		
 		WebDriverWait waitForPageToLoad = new WebDriverWait(driver, 50);
 		waitForPageToLoad.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div/div//div[@aria-label='Welcome']")));
+
+// Primary Consent: Welcome Screen
 		System.out.println(driver.findElement(By.xpath("//div/div//div[@aria-label='Welcome']")).getText());
-		
+		int frameCount = driver.findElements(By.tagName("iframe")).size();
+		System.out.println(frameCount);
 		driver.switchTo().frame(0);
 		waitForPageToLoad.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='player']/div/div[4]/button")));
 		driver.findElement(By.xpath("//div[@id='player']/div/div[4]/button")).click();
 		
-		/*driver.findElement(By.xpath("//div[@class='ytp-progress-bar-container']/div[1]"));
-
-		Actions actions = new Actions(driver);
+		/* Below Code is from Stackoverflow
+		 * https://stackoverflow.com/questions/40546546/how-to-click-on-a-specific-position-of-a-web-element-in-selenium/40571321#40571321
+		 */
+		WebElement progressBar = driver.findElement(By.xpath("//div[@class='ytp-progress-bar-container']/div[1]"));
+		int width = progressBar.getSize().getWidth();
+		Actions act = new Actions(driver);
+	    act.moveToElement(progressBar).moveByOffset((width/2)-2, 0).click().perform();
+	    
+	    driver.switchTo().defaultContent();
+	    Thread.sleep(4000);
+	    waitForPageToLoad.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@ng-if='shouldShowButtonBar()']/button")));
+	    driver.findElement(By.xpath("//div[@ng-if='shouldShowButtonBar()']/button")).click();
+//First Screen completed	    
+	    int frameCount2 = driver.findElements(By.tagName("iframe")).size();
+	    System.out.println(frameCount2);
 		
-		actions.keyDown(Keys.SHIFT.ARROW_RIGHT).build().perform();
-*/		
-		Thread.sleep(15000);
+	    
+	    Thread.sleep(30000);
 		driver.close();
 	}
 
