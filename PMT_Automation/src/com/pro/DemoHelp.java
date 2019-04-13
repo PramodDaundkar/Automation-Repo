@@ -13,10 +13,12 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class DemoParticipant {
-
+public class DemoHelp {
+	static WebDriver driver;
+	static WebDriverWait waitForPageToLoad;
 	public static void main(String[] args) throws Throwable {
 		
 		System.setProperty("webdriver.chrome.driver", "D:\\jar\\chromedriver_win32\\chromedriver.exe");
@@ -53,12 +55,56 @@ public class DemoParticipant {
 		int frameCount = driver.findElements(By.tagName("iframe")).size();
 		System.out.println("Welcome Screen"+":"+frameCount);
 		
-		for(int i=0; i<10;i++)
-		{
-		if(frameCount>1)
-		{
+		videoPlayer(driver);
 		
+//First Screen completed	    
+	    int frameCount2 = driver.findElements(By.tagName("iframe")).size();
+	    System.out.println("Are you ready?"+":"+frameCount2);
+	    singleFrame(driver);
+	    
+	    int frameCount3 = driver.findElements(By.tagName("iframe")).size();
+	    System.out.println("Just so you know"+":"+frameCount3);
+	    singleFrame(driver);
+	    
+	    int frameCount4 = driver.findElements(By.tagName("iframe")).size();
+	    System.out.println("You’re about to make history."+":"+frameCount4);
+	    Thread.sleep(2000);
+	    singleFrame(driver);
+	    
+	    int frameCount5 = driver.findElements(By.tagName("iframe")).size();
+	    System.out.println("Where You Live."+":"+frameCount5);
+	    Select state = new Select(driver.findElement(By.xpath("//div[@class='ng-scope']/select")));
+	    state.selectByVisibleText("Arizona");
+	    singleFrame(driver);
+	    
+	    int frameCount6 = driver.findElements(By.tagName("iframe")).size();
+	    System.out.println("Before We Begin"+":"+frameCount6);
+	    //This will work for Yes only as it needs to be generalise.
+	    driver.findElement(By.xpath("//div[@ng-if='shouldShowText()']/div")).click();
+	    singleFrame(driver);
+	    
+	    int frameCount7 = driver.findElements(By.tagName("iframe")).size();
+	    System.out.println("Where You Get Healthcare"+":"+frameCount7);
+	    Select stateHealth = new Select(driver.findElement(By.xpath("//div[@class='ng-scope']/select")));
+	    stateHealth.selectByVisibleText("Arizona");
+	    singleFrame(driver);
+	    
+	    int frameCount8 = driver.findElements(By.tagName("iframe")).size();
+	    System.out.println("Check Your Understanding"+":"+frameCount8);
+	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
+	    
+	    int frameCount9 = driver.findElements(By.tagName("iframe")).size();
+	    System.out.println("What will I do?"+":"+frameCount9);
+	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
+	    
+	   
+	    Thread.sleep(30000);
+		driver.close();
+	}
+	
+	public static WebDriver videoPlayer(WebDriver driver) throws Throwable{
 		driver.switchTo().frame(0);
+		WebDriverWait waitForPageToLoad = new WebDriverWait(driver, 50);
 		waitForPageToLoad.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='player']/div/div[4]/button")));
 		driver.findElement(By.xpath("//div[@id='player']/div/div[4]/button")).click();
 		
@@ -75,18 +121,11 @@ public class DemoParticipant {
 	    waitForPageToLoad.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@ng-if='shouldShowButtonBar()']/button")));
 	   // driver.findElement(By.xpath("//div[@ng-if='shouldShowButtonBar()']/button")).click();
 	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
-		}else{
-//First Screen completed	    
-	    //int frameCount2 = driver.findElements(By.tagName("iframe")).size();
-	    //System.out.println("Are you ready?"+":"+frameCount2);
-	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
-		}
-	    int frameCount3 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("Just so you know"+":"+frameCount3);
-	    
-		}
-	    Thread.sleep(30000);
-		driver.close();
+	    return driver;
 	}
 
+	public static WebDriver singleFrame(WebDriver driver){
+		driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
+		return driver;
+	}
 }
