@@ -30,18 +30,18 @@ public class DemoHelp {
 		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 		driver.findElement(By.xpath("//form/div[2]/div[5]")).click();//Click on the link for SIGN UP 
 		
-		driver.findElement(By.xpath("//input[@id='signUpEmail']")).sendKeys("qwertyu@gmail.com");//Enter the Email
+		driver.findElement(By.xpath("//input[@id='signUpEmail']")).sendKeys("qwertyui@gmail.com");//Enter the Email
 		
-		WebElement element = driver.findElement(By.xpath("//div[@role='alert']/span"));
+		//WebElement element = driver.findElement(By.xpath("//div[@role='alert']/span"));
 		
-		if(element.isDisplayed())//if user is already exists. If exists then move to Login Page
+		if(driver.findElement(By.xpath("//div[@role='alert']/span")).isDisplayed())//if user is already exists. If exists then move to Login Page
 		{
 			driver.findElement(By.xpath("//a[@data-target='signin.actions.signin']")).click();
-			driver.findElement(By.xpath("//input[@id='usernameEmail']")).sendKeys("qwertyu@gmail.com");
+			driver.findElement(By.xpath("//input[@id='usernameEmail']")).sendKeys("qwertyui@gmail.com");
 			driver.findElement(By.xpath("//input[@id='userPassword']")).sendKeys("Password@01");
 			driver.findElement(By.xpath("//button[@data-target='@login|button|submit']")).click();
 		}
-		else// continue with the SIGN UP process
+		else // continue with the SIGN UP process
 		{
 		driver.findElement(By.xpath("//input[@id='signUpPassword']")).sendKeys("Password@01");
 		driver.findElement(By.xpath("//button[@data-target='@registration|button|next']")).click();
@@ -57,47 +57,64 @@ public class DemoHelp {
 		
 		videoPlayer(driver);
 		
-//First Screen completed	    
-	    int frameCount2 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("Are you ready?"+":"+frameCount2);
-	    singleFrame(driver);
+		for(int i=0; i<=8; i++)
+		{
+			System.out.println(driver.findElement(By.xpath("//div[@ng-bind-html='labelValue']")).getText());
+			if(i==3)
+					{
+						Thread.sleep(2000);
+					}
+			if(i==4){
+						Select state = new Select(driver.findElement(By.xpath("//div[@class='ng-scope']/select")));
+					    state.selectByVisibleText("Arizona");
+					}
+			if(i==5){
+				 driver.findElement(By.xpath("//div[@ng-if='shouldShowText()']/div")).click();
+			}
+			if(i==6){
+				Select stateHealth = new Select(driver.findElement(By.xpath("//div[@class='ng-scope']/select")));
+			    stateHealth.selectByVisibleText("Arizona");
+			}
+			singleFrame(driver);
+		}
+		
+		for(int j=1; j<=8;j++)
+			{
+				videoPlayer(driver);
+			}
+		
+		for(int i=1; i<=16; i++)
+		{
+			if(i==1 || i==3 || i==4)
+			{
+				singleFrame(driver);
+			}
+			if(i==2 || i==5){
+			
+			videoPlayer(driver);
+			}
+			singleFrame(driver);
+			
+		}
+		
+		waitForPageToLoad.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@ng-if='shouldShowButtonBar()']/button")));
+	    driver.findElement(By.xpath("//div[@ng-if='shouldShowLeftImage()']")).click();
+	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
+		
+		driver.findElement(By.xpath("//div/div/div[2]/label/input")).click();
+	    driver.findElement(By.xpath("//div[@ng-style='displayObject.cssStyles']/input")).sendKeys("asdfgh");
 	    
-	    int frameCount3 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("Just so you know"+":"+frameCount3);
-	    singleFrame(driver);
-	    
-	    int frameCount4 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("You’re about to make history."+":"+frameCount4);
-	    Thread.sleep(2000);
-	    singleFrame(driver);
-	    
-	    int frameCount5 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("Where You Live."+":"+frameCount5);
-	    Select state = new Select(driver.findElement(By.xpath("//div[@class='ng-scope']/select")));
-	    state.selectByVisibleText("Arizona");
-	    singleFrame(driver);
-	    
-	    int frameCount6 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("Before We Begin"+":"+frameCount6);
-	    //This will work for Yes only as it needs to be generalise.
-	    driver.findElement(By.xpath("//div[@ng-if='shouldShowText()']/div")).click();
-	    singleFrame(driver);
-	    
-	    int frameCount7 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("Where You Get Healthcare"+":"+frameCount7);
-	    Select stateHealth = new Select(driver.findElement(By.xpath("//div[@class='ng-scope']/select")));
-	    stateHealth.selectByVisibleText("Arizona");
-	    singleFrame(driver);
-	    
-	    int frameCount8 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("Check Your Understanding"+":"+frameCount8);
+	    //System.out.println(driver.findElement(By.xpath("//div[@ng-bind-html='labelValue']")).getText());
+	    waitForPageToLoad.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@ng-if='shouldShowButtonBar()']/button")));
+	    //driver.findElement(By.xpath("//div[@ng-if='shouldShowLeftImage()']")).click();
 	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
 	    
-	    int frameCount9 = driver.findElements(By.tagName("iframe")).size();
-	    System.out.println("What will I do?"+":"+frameCount9);
+	    driver.findElement(By.xpath("//div[@class='table-wrap']/div[2]")).click();
 	    driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
 	    
-	   
+	    personalDetails(driver);
+	    driver.findElement(By.xpath("//button[@data-target='@form|button|submit']")).click();
+	    
 	    Thread.sleep(30000);
 		driver.close();
 	}
@@ -125,7 +142,27 @@ public class DemoHelp {
 	}
 
 	public static WebDriver singleFrame(WebDriver driver){
+		
 		driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
+		return driver;
+	}
+	
+	public static WebDriver personalDetails(WebDriver driver){
+		driver.findElement(By.xpath("//input[@aria-label='first name']")).sendKeys("Qwerty");
+		driver.findElement(By.xpath("//input[@aria-label='last name']")).sendKeys("Asdfg");
+		driver.findElement(By.xpath("//input[@aria-label='address 1']")).sendKeys("Zxcvb");
+		driver.findElement(By.xpath("//input[@aria-label='address 2']")).sendKeys("QWERTYU");
+		driver.findElement(By.xpath("//input[@aria-label='city']")).sendKeys("Las Vegas");
+		
+		Select stateSelect = new Select(driver.findElement(By.xpath("//select")));
+		stateSelect.selectByVisibleText("Arizona");
+		
+		driver.findElement(By.xpath("//input[@aria-label='zip code']")).sendKeys("88901");
+		driver.findElement(By.xpath("//input[@aria-label='phone number']")).sendKeys("9725360124");
+		driver.findElement(By.xpath("//input[@ui-mask-placeholder='mm/dd/yyyy']")).sendKeys("05/05/1972");
+		driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
+		
+		
 		return driver;
 	}
 }
