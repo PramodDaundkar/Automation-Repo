@@ -20,7 +20,7 @@ public class ParticipantRegisterWithPrimaryConsent {
 		driver.get("https://pmiqasub.joinallofus.org/#/register");
 		
 		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-		driver.findElement(By.xpath("//input[@id='signUpEmail']")).sendKeys("Qwertyjun@gmail.com");
+		driver.findElement(By.xpath("//input[@id='signUpEmail']")).sendKeys("qwerty1@gmail.com");
 		driver.findElement(By.xpath("//input[@id='signUpPassword']")).sendKeys("Password@01");
 		driver.findElement(By.xpath("//button")).click();
 		
