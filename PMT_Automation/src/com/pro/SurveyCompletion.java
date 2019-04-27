@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,15 +16,62 @@ public class SurveyCompletion {
 		
 		System.setProperty("webdriver.chrome.driver", "D:\\jar\\chromedriver_win32\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
+		//System.setProperty("webdriver.gecko.driver", "D:\\jar\\firefoxDriver\\geckodriver.exe");
+		//WebDriver driver = new FirefoxDriver();
 		driver.manage().window().maximize();
 		
-		driver.get("https://pmiqasub.joinallofus.org/#/login");//URL LOGIN page 
+		driver.get("https://cotsub.joinallofus.org/#/login");//URL LOGIN page 
 		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-		driver.findElement(By.xpath("//input[@id='usernameEmail']")).sendKeys("qwerty1@gmail.com");
+		driver.findElement(By.xpath("//input[@id='usernameEmail']")).sendKeys("qwertya@gmail.com");
 		driver.findElement(By.xpath("//input[@id='userPassword']")).sendKeys("Password@01");
 		driver.findElement(By.xpath("//button[@data-target='@login|button|submit']")).click();
 		
 		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
+		WebElement lifestyle = driver.findElement(By.xpath("//div/div[2]/div/slides/survey-card[1]/div/div/div/div[2]/div"));
+		System.out.println(lifestyle.getText());
+		if(lifestyle.getText().equals("Lifestyle")){
+			driver.findElement(By.xpath("//div/div[2]/div/slides/survey-card[1]/div/div/div/div[2]/button")).click();
+			driver.findElement(By.xpath("//button[@data-target='@form|button|submit']")).click();
+			
+			for(int i=1; i<=23; i++)
+			{
+				driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
+			}
+			driver.findElement(By.xpath("//button[@data-target='@form|button|submit']")).click();
+		}
+		/*WebElement overallHealth = driver.findElement(By.xpath("//div/div[2]/div/slides/survey-card[1]/div/div/div/div[2]/div"));
+		System.out.println(overallHealth.getText());
+		if(overallHealth.getText().equals("Overall Health")){
+			driver.findElement(By.xpath("//div/div[2]/div/slides/survey-card[1]/div/div/div/div[2]/button")).click();
+			driver.findElement(By.xpath("//button[@data-target='@form|button|submit']")).click();
+			
+			for(int i=1; i<=23; i++)
+			{
+				driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
+			}
+			driver.findElement(By.xpath("//button[@data-target='@form|button|submit']")).click();
+		}*/
+		
+		/*for(int i=1; i<5; i++)
+		{
+			WebElement findingSurveys = driver.findElement(By.xpath("//div/div[2]/div/slides/survey-card["+i+"]/div/div/div/div[2]/button"));
+			WebElement surveyNames = driver.findElement(By.xpath("//div/div[2]/div/slides/survey-card["+i+"]/div/div/div/div[2]/div"));
+			System.out.println(driver.findElement(By.xpath("//div/div[2]/div/slides/survey-card["+i+"]/div/div/div/div[2]/div")).getText());
+			
+			if(findingSurveys.isEnabled() && surveyNames.getText().equals("CityStateZip"))
+			{
+				cityStateZipSurvey(driver);
+			}else if(findingSurveys.isEnabled() && surveyNames.getText().equals("Address Main"))
+			{
+				addressSurvey(driver);
+			}
+		}*/
+		
+		//cityStateZipSurvey(driver);
+		//addressSurvey(driver);
+		
+		
 /*FInd A Partner*/	
 		/*driver.findElement(By.xpath("//div/div[3]//button[@data-target='@banners|openForm|button']")).click();
 		
@@ -35,7 +83,7 @@ public class SurveyCompletion {
 		driver.findElement(By.xpath("//button[@data-target='@form|button|submit']")).click();*/
 /*EHR Consent*/
 		/*WebDriverWait waitForPageToLoad = new WebDriverWait(driver, 50);
-		driver.findElement(By.xpath("//div/div[3]//button[@data-target='@banners|openForm|button']")).click();
+		driver.findElement(By.xpath("//div[@data-target='@banners|openForm']/div[3]")).click();
 		for(int i=0; i<=20;i++)
 		{
 		waitForPageToLoad.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//button[@data-target='@form|button|continue']")));	
@@ -130,7 +178,9 @@ public class SurveyCompletion {
 		driver.findElement(By.xpath("//div/div[2]/div/slides/survey-card[1]/div/div/div/div[2]/button")).click();
 		
 		driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
-		
+		driver.findElement(By.xpath("//div[@class='address-confirmation-container']/div[2]/div[2]/button")).click();
+		driver.findElement(By.xpath("//div[@class='address-verified-container']/label[1]")).click();
+		driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
 		driver.findElement(By.xpath("//button[@data-target='@form|button|submit']")).click();
 		}
 		return driver;
@@ -183,4 +233,34 @@ driver.findElement(By.xpath("//div/div[3]//button[@data-target='@banners|openFor
 		return driver;
 	}
 	
+	public static WebDriver overallHealthSurvey(WebDriver driver){
+		WebElement overallHealth = driver.findElement(By.xpath("//div/div[2]/div/slides/survey-card[2]/div/div/div/div[2]/div"));
+		System.out.println(overallHealth.getText());
+		if(overallHealth.getText().equals("Overall Health")){
+			driver.findElement(By.xpath("//div/div[2]/div/slides/survey-card[2]/div/div/div/div[2]/button")).click();
+			driver.findElement(By.xpath("//button[@data-target='@form|button|submit']")).click();
+			
+			for(int i=1; i<=23; i++)
+			{
+				driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
+			}
+			driver.findElement(By.xpath("//button[@data-target='@form|button|submit']")).click();
+		}
+		return driver;
+	}
+	public static WebDriver lifeStyleSurvey(WebDriver driver){
+		WebElement lifestyle = driver.findElement(By.xpath("//div/div[2]/div/slides/survey-card[1]/div/div/div/div[2]/div"));
+		System.out.println(lifestyle.getText());
+		if(lifestyle.getText().equals("Lifestyle")){
+			driver.findElement(By.xpath("//div/div[2]/div/slides/survey-card[1]/div/div/div/div[2]/button")).click();
+			driver.findElement(By.xpath("//button[@data-target='@form|button|submit']")).click();
+			
+			for(int i=1; i<=23; i++)
+			{
+				driver.findElement(By.xpath("//button[@data-target='@form|button|continue']")).click();
+			}
+			driver.findElement(By.xpath("//button[@data-target='@form|button|submit']")).click();
+		}
+		return driver;
+	}
 }
