@@ -15,7 +15,7 @@ public static void main(String[] args) throws Throwable {
 		
 		driver.get("https://pmtqa.joinallofus.org");
 		driver.findElement(By.xpath("//input[@name='email']")).sendKeys("pdaundkar@vignetcorp.com");
-		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("Password@01");
+		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("Password01*");
 		
 		driver.findElement(By.xpath("//input[@type='submit']")).click();
 		
@@ -74,6 +74,7 @@ public static void main(String[] args) throws Throwable {
 		System.out.println(driver.findElement(By.xpath("//div/div/div/h1")).getText());
 		return driver;
 	}
+	
 	public static WebDriver pmtLogout(WebDriver driver){
 		driver.findElement(By.cssSelector("button.dropdown-toggle.btn.btn-default")).click();
 		driver.findElement(By.xpath("//div/div[2]/ul/li[2]")).click();
