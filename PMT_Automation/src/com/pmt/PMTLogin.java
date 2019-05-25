@@ -1,5 +1,6 @@
 package com.pmt;
 
+import org.jboss.aerogear.security.otp.Totp;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,21 +11,30 @@ public class PMTLogin {
 
 public static void main(String[] args) throws Throwable {
 		
-		System.setProperty("webdriver.chrome.driver","D:\\jar\\chromedriver_win32\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver","D:\\jar\\ChromeDriver\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		
-		driver.get("https://pmtqa.joinallofus.org");
+		driver.get("https://pmtcot.joinallofus.org");
 		driver.findElement(By.xpath("//input[@name='email']")).sendKeys("pdaundkar@vignetcorp.com");
-		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("Password01*");
+		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("Password@01");
 		
 		driver.findElement(By.xpath("//input[@type='submit']")).click();
+		WebDriverWait authenicationWait = new WebDriverWait(driver, 50);
+		authenicationWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='enter6DigitCode']")));
 		
-		Thread.sleep(15000);
-		/*WebDriverWait authenicationWait = new WebDriverWait(driver, 50);
-		authenicationWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Submit']")));
-		*/
+		String otpKeyStr = "FUWRFIPHMI67BQNE";
+		Totp totp = new Totp(otpKeyStr);
+		String twoFactorCode = totp.now();
+		driver.findElement(By.xpath("//input[@name='enter6DigitCode']")).sendKeys(twoFactorCode);
 		driver.findElement(By.xpath("//input[@value='Submit']")).click();
-/*Selecting the Enterprise actors*/
+		Thread.sleep(15000);
+		
+		
+/*		WebDriverWait authenicationWait = new WebDriverWait(driver, 50);
+		authenicationWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Submit']")));
+		
+		driver.findElement(By.xpath("//input[@value='Submit']")).click();
+Selecting the Enterprise actors
 		
 		WebDriverWait wiat = new WebDriverWait(driver, 50);
 		wiat.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button#manager-account.dropdown-toggle.btn.btn-default")));
@@ -33,28 +43,28 @@ public static void main(String[] args) throws Throwable {
 		for(int i=1; i<=9;i++){
 			System.out.println(driver.findElement(By.xpath("//ul[@aria-labelledby='manager-account']/li["+i+"]")).getText());
 		}
-		/*Communication and Engagement Manager*/
+		Communication and Engagement Manager
 		//driver.findElement(By.xpath("//ul[@aria-labelledby='manager-account']/li[1]")).click();
-		/*Program Coordinator*/
+		Program Coordinator
 		//driver.findElement(By.xpath("//ul[@aria-labelledby='manager-account']/li[2]")).click();
 
-		/* Program Manager*/
+		 Program Manager
 		//driver.findElement(By.xpath("//ul[@aria-labelledby='manager-account']/li[3]")).click();
 
-		/*Research Assistant*/
+		Research Assistant
 		//driver.findElement(By.xpath("//ul[@aria-labelledby='manager-account']/li[4]")).click();
 
-		/*Site Manager*/
+		Site Manager
 		//driver.findElement(By.xpath("//ul[@aria-labelledby='manager-account']/li[5]")).click();
 
-		/*Support Admin*/	
+		Support Admin	
 		
 		driver.findElement(By.xpath("//ul[@aria-labelledby='manager-account']/li[6]")).click();
 		System.out.println("Enterprise User:"+driver.findElement(By.xpath("//ul[@aria-labelledby='manager-account']/li[6]")));
 		//driver.findElement(By.xpath("//li[@role='presentation'][6]")).click();
 
 		Thread.sleep(10000);
-		driver.close();
+		driver.close();*/
 /*Click on HELPDESK and then tap on cancel*/
 		//driver.findElement(By.cssSelector("//span[@class='help-desk-label']")).click();
 /*		driver.findElement(By.xpath("//div/div//span[@class='help-desk-label']")).click();

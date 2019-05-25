@@ -15,16 +15,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class ParticipantRegisterWithPrimaryConsent {
 
 	public static void main(String[] args) throws Throwable {
-		//System.setProperty("webdriver.chrome.driver", "D:\\jar\\chromedriver_win32\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "D:\\jar\\ChromeDriver\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		//System.setProperty("webdriver.gecko.driver", "D:\\jar\\firefoxDriver\\geckodriver.exe");
 		//WebDriver driver = new ChromeDriver();
-		System.setProperty("webdriver.gecko.driver", "D:\\jar\\firefoxDriver\\geckodriver.exe");
-		//WebDriver driver = new ChromeDriver();
-		WebDriver driver = new FirefoxDriver();
+		//WebDriver driver = new FirefoxDriver();
 		driver.manage().window().maximize();
-		driver.get("https://pmiqasub.joinallofus.org/#/register");
+		driver.get("https://cotsub.joinallofus.org/#/register");
 		
 		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-		driver.findElement(By.xpath("//input[@id='signUpEmail']")).sendKeys("qwerty123@gmail.com");
+		driver.findElement(By.xpath("//input[@id='signUpEmail']")).sendKeys("pramodA_cot@gmail.com");
 		driver.findElement(By.xpath("//input[@id='signUpPassword']")).sendKeys("Password@01");
 		driver.findElement(By.xpath("//button")).click();
 		

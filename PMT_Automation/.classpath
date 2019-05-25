@@ -9,5 +9,15 @@
 	<classpathentry kind="lib" path="D:/jar/libs/okio-1.14.0.jar"/>
 	<classpathentry kind="lib" path="D:/jar/client-combined-3.141.59.jar"/>
 	<classpathentry kind="lib" path="D:/jar/client-combined-3.141.59-sources.jar"/>
+	<classpathentry kind="lib" path="D:/jar/jar_files/big-math-2.1.0.jar"/>
+	<classpathentry kind="lib" path="D:/jar/jar_files/crypto-0.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/jar/jar_files/diff_match_patch-current.jar"/>
+	<classpathentry kind="lib" path="D:/jar/jar_files/logback-classic-1.2.3.jar"/>
+	<classpathentry kind="lib" path="D:/jar/jar_files/logback-core-1.2.3.jar"/>
+	<classpathentry kind="lib" path="D:/jar/jar_files/math-0.6.4.jar"/>
+	<classpathentry kind="lib" path="D:/jar/jar_files/otp-0.3.1.jar"/>
+	<classpathentry kind="lib" path="D:/jar/jar_files/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="D:/jar/jar_files/util-0.7.9.jar"/>
+	<classpathentry kind="lib" path="D:/jar/aerogear-otp-java-1.0.0.m1.jar/aerogear-otp-java-1.0.0.m1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
