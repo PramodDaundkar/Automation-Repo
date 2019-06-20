@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test name="testng(failed)">
+    <classes>
+      <class name="com.pro.MCLogin">
+        <methods>
+          <include name="BeforeLoginFAQ"/>
+        </methods>
+      </class> <!-- com.pro.MCLogin -->
+    </classes>
+  </test> <!-- testng(failed) -->
+</suite> <!-- Failed suite [Suite] -->
